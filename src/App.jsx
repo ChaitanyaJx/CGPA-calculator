@@ -181,10 +181,10 @@ function App() {
         <p className="text-sm text-gray-500">Made by Chaitanya Jambhulkar</p>
       </div>
       {showResults && (
-        <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-75 flex justify-center items-center">
+        <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
           <div className="bg-white p-8 rounded-md shadow-lg w-[90%] max-w-[500px] relative">
             <h2 className="text-2xl font-bold mb-4">Results</h2>
-            <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="mb-4 grid grid-cols-2 gap-4">
               <div>
                 <label className="block font-bold mb-2">Name:</label>
                 <input
@@ -206,7 +206,7 @@ function App() {
                 />
               </div>
             </div>
-            <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="mb-4 grid grid-cols-2 gap-4">
               <div>
                 <label className="block font-bold mb-2">Branch:</label>
                 <input
@@ -277,6 +277,9 @@ function App() {
             </div>
           </div>
         </div>
+      )}
+      {showResults && (
+        <div className="fixed top-0 left-0 w-full h-full bg-white z-40"></div>
       )}
     </>
   );
