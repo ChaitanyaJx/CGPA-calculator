@@ -70,7 +70,7 @@ function App() {
 
   return (
     <>
-      <div className="bg-blue-500 w-full h-[300px]">
+      <div className="bg-blue-500 w-full h-[300px] relative">
         <div className="flex justify-center p-3">
           <div className="text-3xl text-white mt-4">CGPA Calculator</div>
         </div>
@@ -78,7 +78,7 @@ function App() {
           Calculate your Semester CGPA, CGPA and check how much you need next
           to cross that legendary GPA Mark
         </div>
-        <div className="flex flex-col bg-white w-[500px] h-[550px] mx-auto my-5">
+        <div className="flex flex-col bg-white w-[500px] h-[550px] mx-auto my-5 relative">
           <div className="flex flex-row px-2 space-x-2 items-center bg-slate-100 w-[500px] h-[60px]">
             <button onClick={addSubject} className="bg-blue-500 text-white px-4 py-2 rounded-md">
               Add Subject
@@ -139,105 +139,108 @@ function App() {
         </div>
       </div>
 
+      <div className="fixed bottom-0 right-0 mb-4 mr-4 bg-white p-4 rounded-md">
+        <p className="text-sm text-gray-500">Made by Chaitanya Jambhulkar</p>
+      </div>
 
       {showResults && (
-  <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-75 flex justify-center items-center">
-    <div className="bg-white p-8 rounded-md shadow-lg w-[500px]">
-      <h2 className="text-2xl font-bold mb-4">Results</h2>
-      <div className="mb-4 grid grid-cols-2 gap-4">
-        <div>
-          <label className="block font-bold mb-2">Name:</label>
-          <input
-            type="text"
-            className="border border-gray-300 rounded-md px-3 py-2 w-full"
-            placeholder="Enter your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+        <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-75 flex justify-center items-center">
+          <div className="bg-white p-8 rounded-md shadow-lg w-[500px] relative">
+            <h2 className="text-2xl font-bold mb-4">Results</h2>
+            <div className="mb-4 grid grid-cols-2 gap-4">
+              <div>
+                <label className="block font-bold mb-2">Name:</label>
+                <input
+                  type="text"
+                  className="border border-gray-300 rounded-md px-3 py-2 w-full"
+                  placeholder="Enter your name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="block font-bold mb-2">College Name:</label>
+                <input
+                  type="text"
+                  className="border border-gray-300 rounded-md px-3 py-2 w-full"
+                  placeholder="Enter your college name"
+                  value={collegeName}
+                  onChange={(e) => setCollegeName(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="mb-4 grid grid-cols-2 gap-4">
+              <div>
+                <label className="block font-bold mb-2">Branch:</label>
+                <input
+                  type="text"
+                  className="border border-gray-300 rounded-md px-3 py-2 w-full"
+                  placeholder="Enter your branch"
+                  value={branch}
+                  onChange={(e) => setBranch(e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="block font-bold mb-2">Semester:</label>
+                <input
+                  type="number"
+                  className="border border-gray-300 rounded-md px-3 py-2 w-full"
+                  placeholder="Enter your semester"
+                  value={semester}
+                  onChange={(e) => setSemester(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="mb-4">
+              <label className="block font-bold mb-2">Subjects:</label>
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr>
+                    <th className="border border-gray-300 px-4 py-2">Credits</th>
+                    <th className="border border-gray-300 px-4 py-2">Subjects</th>
+                    <th className="border border-gray-300 px-4 py-2">Grade</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {subjects.map((subject, index) => (
+                    <tr key={index}>
+                      <td className="border border-gray-300 px-4 py-2">
+                        {subject.credits}
+                      </td>
+                      <td className="border border-gray-300 px-4 py-2">
+                        {subject.subject}
+                      </td>
+                      <td className="border border-gray-300 px-4 py-2">
+                        {subject.grade}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="mb-4 flex justify-between items-center">
+              <div>
+                <label className="block font-bold mb-2">CGPA:</label>
+                <div className="text-2xl font-bold">{calculateCGPA()}</div>
+              </div>
+              <div className="flex justify-end">
+                <button
+                  onClick={handlePrint}
+                  className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2"
+                >
+                  Print
+                </button>
+                <button
+                  onClick={() => setShowResults(false)}
+                  className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <label className="block font-bold mb-2">College Name:</label>
-          <input
-            type="text"
-            className="border border-gray-300 rounded-md px-3 py-2 w-full"
-            placeholder="Enter your college name"
-            value={collegeName}
-            onChange={(e) => setCollegeName(e.target.value)}
-          />
-        </div>
-      </div>
-      <div className="mb-4 grid grid-cols-2 gap-4">
-        <div>
-          <label className="block font-bold mb-2">Branch:</label>
-          <input
-            type="text"
-            className="border border-gray-300 rounded-md px-3 py-2 w-full"
-            placeholder="Enter your branch"
-            value={branch}
-            onChange={(e) => setBranch(e.target.value)}
-          />
-        </div>
-        <div>
-          <label className="block font-bold mb-2">Semester:</label>
-          <input
-            type="number"
-            className="border border-gray-300 rounded-md px-3 py-2 w-full"
-            placeholder="Enter your semester"
-            value={semester}
-            onChange={(e) => setSemester(e.target.value)}
-          />
-        </div>
-      </div>
-      <div className="mb-4">
-        <label className="block font-bold mb-2">Subjects:</label>
-        <table className="w-full border-collapse">
-          <thead>
-            <tr>
-              <th className="border border-gray-300 px-4 py-2">Credits</th>
-              <th className="border border-gray-300 px-4 py-2">Subjects</th>
-              <th className="border border-gray-300 px-4 py-2">Grade</th>
-            </tr>
-          </thead>
-          <tbody>
-            {subjects.map((subject, index) => (
-              <tr key={index}>
-                <td className="border border-gray-300 px-4 py-2">
-                  {subject.credits}
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  {subject.subject}
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  {subject.grade}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="mb-4 flex justify-between items-center">
-        <div>
-          <label className="block font-bold mb-2">CGPA:</label>
-          <div className="text-2xl font-bold">{calculateCGPA()}</div>
-        </div>
-        <div className="flex justify-end">
-          <button
-            onClick={handlePrint}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2"
-          >
-            Print
-          </button>
-          <button
-            onClick={() => setShowResults(false)}
-            className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md"
-          >
-            Close
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
+      )}
     </>
   );
 }
