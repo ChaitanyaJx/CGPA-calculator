@@ -176,10 +176,10 @@ function App() {
           </div>
         </div>
       </div>
-
-      <div className="fixed bottom-0 right-0 mb-4 mr-4 bg-white p-4 rounded-md">
-        <p className="text-sm text-gray-500">Made by Chaitanya Jambhulkar</p>
+      <div className="relative mb-4 ml-4 bg-white p-4 rounded-md flex justify-end">
+          <p className="text-sm text-gray-500">Made by Chaitanya Jambhulkar</p>
       </div>
+
       {showResults && (
         <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
           <div className="bg-white p-8 rounded-md shadow-lg w-[90%] max-w-[500px] relative">
