@@ -212,7 +212,7 @@ function App() {
                     <option value="D">D</option>
                     <option value="E">E</option>
                     <option value="U">U</option>
-                  </select>
+                  </select>g
                 </div>
               ))}
             </div>
@@ -223,7 +223,7 @@ function App() {
         </div>
       )}
 
-      <div className="fixed bottom-0 right-0 mb-4 mr-4 bg-white p-4 rounded-md shadow-lg">
+      <div className="fixed bottom-0 right-0 mb-4 mr-4 bg-white p-4 rounded-md">
         <p className="text-sm text-gray-500">Made by Chaitanya Jambhulkar</p>
       </div>
 
