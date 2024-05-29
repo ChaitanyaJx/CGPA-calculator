@@ -8,6 +8,29 @@ function App() {
   const [collegeName, setCollegeName] = useState("");
   const [showResults, setShowResults] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const saveSubjectsToLocalStorage = () => {
+    localStorage.setItem('subjects', JSON.stringify(subjects));
+  };
+  
+  const getSubjectsFromLocalStorage = () => {
+    const storedSubjects = localStorage.getItem('subjects');
+    return storedSubjects ? JSON.parse(storedSubjects) : [];
+  };
+  
+  useEffect(() => {
+    const storedSubjects = getSubjectsFromLocalStorage();
+    if (storedSubjects.length > 0) {
+      setSubjects(storedSubjects);
+    }
+  
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  
 
   useEffect(() => {
     const handleResize = () => {
@@ -22,18 +45,20 @@ function App() {
     const updatedSubjects = [...subjects];
     updatedSubjects[index][key] = value;
     setSubjects(updatedSubjects);
+    saveSubjectsToLocalStorage();
   };
-
+  
   const addSubject = () => {
     setSubjects([...subjects, { subject: "", credits: 0, grade: "" }]);
+    saveSubjectsToLocalStorage();
   };
-
+  
   const deleteSubject = (index) => {
     const updatedSubjects = [...subjects];
     updatedSubjects.splice(index, 1);
     setSubjects(updatedSubjects);
+    saveSubjectsToLocalStorage();
   };
-
   const calculateCGPA = () => {
     let totalCredits = 0;
     let totalGradePoints = 0;
