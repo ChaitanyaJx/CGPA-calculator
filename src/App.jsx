@@ -198,10 +198,12 @@ function App() {
                     type="number"
                     placeholder="Credits"
                     value={subject.credits}
+                    className="w-[30%] mx-4"
                     onChange={(e) => handleSubjectChange(index, "credits", e.target.value)}
                   />
                   <select
                     value={subject.grade}
+                    className="m-auto"
                     onChange={(e) => handleSubjectChange(index, "grade", e.target.value)}
                   >
                     <option value="">Select Grade</option>
@@ -212,7 +214,7 @@ function App() {
                     <option value="D">D</option>
                     <option value="E">E</option>
                     <option value="U">U</option>
-                  </select>g
+                  </select>
                 </div>
               ))}
             </div>
